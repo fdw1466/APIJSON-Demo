@@ -28,10 +28,12 @@ import apijson.orm.Verifier;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -42,14 +44,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * SpringBootApplication
  * 右键这个类 > Run As > Java Application
  *
- * @author Lemon
+ * @author DWER
  */
 @Configuration
 @SpringBootApplication
 @EnableConfigurationProperties
-public class DemoApplication extends SpringBootServletInitializer implements ApplicationContextAware {
+public class DemoApplication extends SpringBootServletInitializer
+        implements ApplicationContextAware, ApplicationListener<ApplicationStartedEvent> {
+    /**
+     * 全局 ApplicationContext 实例，方便 getBean 拿到 Spring/SpringBoot 注入的类实例
+     */
+    private static ApplicationContext APPLICATION_CONTEXT;
 
-    static {
+    public static ApplicationContext getApplicationContext() {
+        return APPLICATION_CONTEXT;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        APPLICATION_CONTEXT = applicationContext;
+    }
+
+    @Override
+    public void onApplicationEvent(ApplicationStartedEvent applicationStartedEvent) {
         APIJSONApplication.DEFAULT_APIJSON_CREATOR = new APIJSONCreator() {
             @Override
             public SQLConfig createSQLConfig() {
@@ -71,36 +92,16 @@ public class DemoApplication extends SpringBootServletInitializer implements App
                 return new DemoVerifier();
             }
         };
-    }
-
-    public DemoApplication() {
-        //关闭调试模式
-        Log.DEBUG = false;
 
         try {
-            // 4.4.0 以上需要这句来保证以上 static 代码块中给 DEFAULT_APIJSON_CREATOR 赋值会生效
+            //初始化APIJSON
             APIJSONApplication.init(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
-
-    /**
-     * 全局 ApplicationContext 实例，方便 getBean 拿到 Spring/SpringBoot 注入的类实例
-     */
-    private static ApplicationContext APPLICATION_CONTEXT;
-
-    public static ApplicationContext getApplicationContext() {
-        return APPLICATION_CONTEXT;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        APPLICATION_CONTEXT = applicationContext;
+        //关闭调试模式
+        Log.DEBUG = false;
     }
 
     /**
