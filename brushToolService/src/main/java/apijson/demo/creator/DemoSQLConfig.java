@@ -12,11 +12,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo;
+package apijson.demo.creator;
 
 import apijson.RequestMethod;
+import apijson.demo.model.Privacy;
+import apijson.demo.model.User;
 import apijson.framework.APIJSONSQLConfig;
 import apijson.orm.AbstractSQLConfig;
+import apijson.orm.model.Access;
 import com.alibaba.fastjson.JSONObject;
 
 import static apijson.framework.APIJSONConstant.*;
@@ -36,16 +39,20 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
         // TODO 默认数据库名/模式，改成你自己的，默认情况是 MySQL: sys, PostgreSQL: public, SQL Server: dbo, Oracle:
         DEFAULT_SCHEMA = "brush_tool";
 
-        // 表名和数据库不一致的，需要配置映射关系。只使用 APIJSONORM 时才需要；
-        // 如果用了 apijson-framework 且调用了 APIJSONApplication.init
-        // (间接调用 DemoVerifier.init 方法读取数据库 Access 表来替代手动输入配置)，则不需要。
-        // 但如果 Access 这张表的对外表名与数据库实际表名不一致，仍然需要这里注册。例如
-        //		TABLE_KEY_MAP.put(Access.class.getSimpleName(), "access");
-
-        //表名映射，隐藏真实表名，对安全要求很高的表可以这么做
+        //表名和数据库不一致的，需要配置映射关系。只使用 APIJSONORM 时才需要；
+        //这个 Demo 用了 apijson-framework 且调用了 APIJSONApplication.init
+        //(间接调用 DemoVerifier.init 方法读取数据库 Access 表来替代手动输入配置)，所以不需要。
+        //但如果 Access 这张表的对外表名与数据库实际表名不一致，仍然需要这里注册。例如
+        TABLE_KEY_MAP.put(Access.class.getSimpleName(), "access");
+        TABLE_KEY_MAP.put(User.class.getSimpleName(), "user");
+        TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "privacy");
         TABLE_KEY_MAP.put("Terminal", "terminal");
         TABLE_KEY_MAP.put("Apk", "apk");
         TABLE_KEY_MAP.put("Log", "log");
+
+        //表名映射，隐藏真实表名，对安全要求很高的表可以这么做
+        //		TABLE_KEY_MAP.put(User.class.getSimpleName(), "apijson_user");
+        //		TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "apijson_privacy");
 
         //主键名映射
         SIMPLE_CALLBACK = new SimpleCallback() {
@@ -93,7 +100,6 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
 
     @Override
     public String getDBVersion() {
-        // TODO 改成你自己的 MySQL 或 PostgreSQL 数据库版本号  // MYSQL 8 和 7 使用的 JDBC 配置不一样
         return "5.7.22";
     }
 

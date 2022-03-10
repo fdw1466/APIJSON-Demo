@@ -15,10 +15,16 @@ limitations under the License.*/
 package apijson.demo;
 
 import apijson.Log;
+import apijson.demo.creator.DemoParser;
+import apijson.demo.creator.DemoSQLConfig;
+import apijson.demo.creator.DemoSQLExecutor;
+import apijson.demo.creator.DemoVerifier;
 import apijson.framework.APIJSONApplication;
 import apijson.framework.APIJSONCreator;
+import apijson.orm.Parser;
 import apijson.orm.SQLConfig;
 import apijson.orm.SQLExecutor;
+import apijson.orm.Verifier;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -53,6 +59,16 @@ public class DemoApplication extends SpringBootServletInitializer implements App
             @Override
             public SQLExecutor createSQLExecutor() {
                 return new DemoSQLExecutor();
+            }
+
+            @Override
+            public Parser<Long> createParser() {
+                return new DemoParser();
+            }
+
+            @Override
+            public Verifier<Long> createVerifier() {
+                return new DemoVerifier();
             }
         };
     }
