@@ -31,7 +31,7 @@ import static apijson.framework.APIJSONConstant.*;
  * SQL配置，这里不配置数据库账号密码等信息，改为使用 DemoDataSourceConfig 来配置
  * TiDB 用法和 MySQL 一致
  *
- * @author Lemon
+ * @author DWER
  */
 public class DemoSQLConfig extends APIJSONSQLConfig {
 
@@ -50,9 +50,6 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
         TABLE_KEY_MAP.put(Function.class.getSimpleName(), "sys_function");
         TABLE_KEY_MAP.put(User.class.getSimpleName(), "sys_user");
         TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "sys_privacy");
-        TABLE_KEY_MAP.put("Terminal", "tb_terminal");
-        TABLE_KEY_MAP.put("Apk", "tb_apk");
-        TABLE_KEY_MAP.put("Log", "tb_log");
 
         //主键名映射
         SIMPLE_CALLBACK = new SimpleCallback() {

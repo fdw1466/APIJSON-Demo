@@ -16,6 +16,7 @@ package apijson.demo.controller;
 
 import apijson.JSONResponse;
 import apijson.Log;
+import apijson.RequestMethod;
 import apijson.StringUtil;
 import apijson.demo.creator.DemoParser;
 import apijson.demo.creator.DemoVerifier;
@@ -24,6 +25,7 @@ import apijson.demo.model.User;
 import apijson.framework.APIJSONController;
 import apijson.framework.BaseModel;
 import apijson.orm.JSONRequest;
+import apijson.orm.Parser;
 import apijson.orm.exception.ConditionErrorException;
 import apijson.orm.exception.NotExistException;
 import com.alibaba.fastjson.JSONObject;
