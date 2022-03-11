@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * 简化Parser，getObject和getArray(getArrayConfig)都能用
  *
- * @author Lemon
+ * @author DWER
  */
 public class DemoObjectParser extends APIJSONObjectParser {
 

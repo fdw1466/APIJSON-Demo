@@ -16,6 +16,7 @@ package apijson.demo.controller;
 
 import apijson.JSONResponse;
 import apijson.Log;
+import apijson.RequestMethod;
 import apijson.StringUtil;
 import apijson.demo.creator.DemoParser;
 import apijson.demo.creator.DemoVerifier;
@@ -24,6 +25,7 @@ import apijson.demo.model.User;
 import apijson.framework.APIJSONController;
 import apijson.framework.BaseModel;
 import apijson.orm.JSONRequest;
+import apijson.orm.Parser;
 import apijson.orm.exception.ConditionErrorException;
 import apijson.orm.exception.NotExistException;
 import com.alibaba.fastjson.JSONObject;
@@ -79,12 +81,6 @@ public class DemoController extends APIJSONController {
             _map.remove(key);
         }
     }
-
-//    @Override
-//    public Parser<Long> newParser(HttpSession session, RequestMethod method) {
-//        //TODO 这里关闭校验，方便新手快速测试，实际线上项目建议开启
-//        return super.newParser(session, method).setNeedVerify(false);
-//    }
 
     /**
      * 登录

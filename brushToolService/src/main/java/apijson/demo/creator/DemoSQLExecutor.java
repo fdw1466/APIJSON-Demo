@@ -42,7 +42,6 @@ public class DemoSQLExecutor extends APIJSONSQLExecutor {
     public Connection getConnection(SQLConfig config) throws Exception {
         String key = config.getDatasource() + "-" + config.getDatabase();
         Connection c = connectionMap.get(key);
-        Log.i(TAG, "getConnection by key: " + key);
         if (c == null || c.isClosed()) {
             try {
                 DataSource ds = DemoApplication.getApplicationContext().getBean(DataSource.class);

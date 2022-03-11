@@ -20,7 +20,7 @@ import apijson.framework.APIJSONVerifier;
 /**
  * 权限验证器
  *
- * @author Lemon
+ * @author DWER
  */
 public class DemoVerifier extends APIJSONVerifier {
     public static final String TAG = "DemoVerifier";
@@ -30,7 +30,6 @@ public class DemoVerifier extends APIJSONVerifier {
     //	public String getVisitorIdKey(SQLConfig config) {
     //		return super.getVisitorIdKey(config);  // return "userid"; // return "uid" 等自定义的字段名
     //	}
-
 
 
 }

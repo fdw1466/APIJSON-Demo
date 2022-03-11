@@ -1,10 +1,11 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="apijson-demo-hikaricp:war exploded">
-    <output-path>$PROJECT_DIR$/target/apijson-demo-hikaricp</output-path>
+  <artifact type="exploded-war" name="apijson-demo:war exploded">
+    <output-path>$PROJECT_DIR$/target/apijson-demo</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="apijson-demo-hikaricp" />
+          <element id="module-output" name="brushToolService" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.github.APIJSON:apijson-framework:4.8.0" />
@@ -50,9 +51,14 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.3.3" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.2.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: com.github.APIJSON:apijson-framework:4.9.1" />
+          <element id="library" level="project" name="Maven: com.github.Tencent:APIJSON:4.9.1" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:9.0.41" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="apijson-demo-hikaricp/web/Web" />
+      <element id="javaee-facet-resources" facet="brushToolService/web/Web" />
     </root>
   </artifact>
 </component>
