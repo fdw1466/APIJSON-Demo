@@ -20,6 +20,8 @@ import apijson.demo.model.User;
 import apijson.framework.APIJSONSQLConfig;
 import apijson.orm.AbstractSQLConfig;
 import apijson.orm.model.Access;
+import apijson.orm.model.Function;
+import apijson.orm.model.Request;
 import com.alibaba.fastjson.JSONObject;
 
 import static apijson.framework.APIJSONConstant.*;
@@ -42,17 +44,15 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
         //表名和数据库不一致的，需要配置映射关系。只使用 APIJSONORM 时才需要；
         //这个 Demo 用了 apijson-framework 且调用了 APIJSONApplication.init
         //(间接调用 DemoVerifier.init 方法读取数据库 Access 表来替代手动输入配置)，所以不需要。
-        //但如果 Access 这张表的对外表名与数据库实际表名不一致，仍然需要这里注册。例如
-        TABLE_KEY_MAP.put(Access.class.getSimpleName(), "access");
-        TABLE_KEY_MAP.put(User.class.getSimpleName(), "user");
-        TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "privacy");
-        TABLE_KEY_MAP.put("Terminal", "terminal");
-        TABLE_KEY_MAP.put("Apk", "apk");
-        TABLE_KEY_MAP.put("Log", "log");
-
-        //表名映射，隐藏真实表名，对安全要求很高的表可以这么做
-        //		TABLE_KEY_MAP.put(User.class.getSimpleName(), "apijson_user");
-        //		TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "apijson_privacy");
+        //但如果 Access 这张表的对外表名与数据库实际表名不一致，仍然需要这里注册。
+        TABLE_KEY_MAP.put(Access.class.getSimpleName(), "sys_access");
+        TABLE_KEY_MAP.put(Request.class.getSimpleName(), "sys_request");
+        TABLE_KEY_MAP.put(Function.class.getSimpleName(), "sys_function");
+        TABLE_KEY_MAP.put(User.class.getSimpleName(), "sys_user");
+        TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "sys_privacy");
+        TABLE_KEY_MAP.put("Terminal", "tb_terminal");
+        TABLE_KEY_MAP.put("Apk", "tb_apk");
+        TABLE_KEY_MAP.put("Log", "tb_log");
 
         //主键名映射
         SIMPLE_CALLBACK = new SimpleCallback() {

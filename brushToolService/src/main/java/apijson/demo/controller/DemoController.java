@@ -80,12 +80,6 @@ public class DemoController extends APIJSONController {
         }
     }
 
-//    @Override
-//    public Parser<Long> newParser(HttpSession session, RequestMethod method) {
-//        //TODO 这里关闭校验，方便新手快速测试，实际线上项目建议开启
-//        return super.newParser(session, method).setNeedVerify(false);
-//    }
-
     /**
      * 登录
      *
