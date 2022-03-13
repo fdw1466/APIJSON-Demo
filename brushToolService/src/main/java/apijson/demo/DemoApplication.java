@@ -14,6 +14,7 @@ limitations under the License.*/
 
 package apijson.demo;
 
+import apijson.JSONObject;
 import apijson.Log;
 import apijson.demo.creator.*;
 import apijson.framework.APIJSONApplication;
@@ -102,6 +103,8 @@ public class DemoApplication extends SpringBootServletInitializer
 
         //关闭调试模式
         Log.DEBUG = false;
+
+        JSONObject.KEY_USER_ID = "user_id";
     }
 
     /**

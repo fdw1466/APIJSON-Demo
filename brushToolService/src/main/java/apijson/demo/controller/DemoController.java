@@ -161,7 +161,7 @@ public class DemoController extends APIJSONController {
         }
 
         //登录状态保存至session
-        super.login(session, user, 1, null, null);
+        super.login(session, user, null, null, null);
         //用户id
         session.setAttribute(USER_ID, userId);
         //用户基本信息
