@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="brushToolService" />
         <module name="apijson-demo-hikaricp" />
         <module name="APIJSONDemo-HikariCP" />
         <module name="flashToolService" />
+        <module name="brushService" />
       </profile>
     </annotationProcessing>
   </component>
