@@ -10,6 +10,7 @@
         <module name="APIJSONDemo-HikariCP" />
         <module name="flashToolService" />
         <module name="brushService" />
+        <module name="whitelistService" />
       </profile>
     </annotationProcessing>
   </component>

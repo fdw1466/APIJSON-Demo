@@ -39,7 +39,7 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
         // TODO 默认数据库类型，改成你自己的
         DEFAULT_DATABASE = DATABASE_MYSQL;
         // TODO 默认数据库名/模式，改成你自己的，默认情况是 MySQL: sys, PostgreSQL: public, SQL Server: dbo, Oracle:
-        DEFAULT_SCHEMA = "brush_tool";
+        DEFAULT_SCHEMA = "whitelist";
 
         //表名和数据库不一致的，需要配置映射关系。只使用 APIJSONORM 时才需要；
         //这个 Demo 用了 apijson-framework 且调用了 APIJSONApplication.init

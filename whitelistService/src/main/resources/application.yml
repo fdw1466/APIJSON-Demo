@@ -1,7 +1,7 @@
 server:
-  port: 8011
+  port: 802
   servlet:
-    context-path: /brushToolService
+    context-path: /whitelistService
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
