@@ -12,10 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.creator;
+package apijson.creator;
 
+import apijson.Application;
 import apijson.Log;
-import apijson.demo.DemoApplication;
 import apijson.framework.APIJSONSQLExecutor;
 import apijson.orm.SQLConfig;
 
@@ -28,7 +28,7 @@ import java.sql.Connection;
  *
  * @author DWER
  */
-public class DemoSQLExecutor extends APIJSONSQLExecutor {
+public class MySQLExecutor extends APIJSONSQLExecutor {
     public static final String TAG = "DemoSQLExecutor";
 
     /**
@@ -44,7 +44,7 @@ public class DemoSQLExecutor extends APIJSONSQLExecutor {
         Connection c = connectionMap.get(key);
         if (c == null || c.isClosed()) {
             try {
-                DataSource ds = DemoApplication.getApplicationContext().getBean(DataSource.class);
+                DataSource ds = Application.getApplicationContext().getBean(DataSource.class);
                 connectionMap.put(key, ds.getConnection());
             } catch (Exception e) {
                 Log.e(TAG, "getConnection   try { "

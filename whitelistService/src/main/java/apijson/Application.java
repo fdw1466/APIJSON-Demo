@@ -12,17 +12,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo;
+package apijson;
 
-import apijson.Log;
-import apijson.demo.creator.*;
+import apijson.creator.*;
 import apijson.framework.APIJSONApplication;
 import apijson.framework.APIJSONCreator;
 import apijson.orm.*;
+import apijson.utils.PropertyUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -34,7 +33,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 /**
  * SpringBootApplication
  * 右键这个类 > Run As > Java Application
@@ -44,8 +42,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @SpringBootApplication
 @EnableConfigurationProperties
-public class DemoApplication extends SpringBootServletInitializer
+public class Application extends SpringBootServletInitializer
         implements ApplicationContextAware, ApplicationListener<ApplicationStartedEvent> {
+    public static final String TAG = "Application";
+
     /**
      * 全局 ApplicationContext 实例，方便 getBean 拿到 Spring/SpringBoot 注入的类实例
      */
@@ -56,7 +56,7 @@ public class DemoApplication extends SpringBootServletInitializer
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override
@@ -69,39 +69,40 @@ public class DemoApplication extends SpringBootServletInitializer
         APIJSONApplication.DEFAULT_APIJSON_CREATOR = new APIJSONCreator() {
             @Override
             public SQLConfig createSQLConfig() {
-                return new DemoSQLConfig();
+                return new MySQLConfig();
             }
 
             @Override
             public SQLExecutor createSQLExecutor() {
-                return new DemoSQLExecutor();
+                return new MySQLExecutor();
             }
 
             @Override
             public Parser<Long> createParser() {
-                return new DemoParser();
+                return new MyParser();
             }
 
             @Override
             public Verifier<Long> createVerifier() {
-                return new DemoVerifier();
+                return new MyVerifier();
             }
 
             @Override
             public FunctionParser createFunctionParser() {
-                return new DemoFunctionParser();
+                return new MyFunctionParser();
             }
         };
 
         try {
-            //初始化APIJSON
+            //初始化
             APIJSONApplication.init(false);
+            //全局修改KEY_USER_ID
+            JSONObject.KEY_USER_ID = "user_id";
+            //调试模式
+            Log.DEBUG = "1".equals(PropertyUtil.getProperty("debug"));
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
-
-        //关闭调试模式
-        Log.DEBUG = false;
     }
 
     /**

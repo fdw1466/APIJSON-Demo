@@ -61,7 +61,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<mainClass>apijson.demo.DemoApplication</mainClass>
+					<mainClass>apijson.Application</mainClass>
 				</configuration>
 				<executions>
 					<execution>

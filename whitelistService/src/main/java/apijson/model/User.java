@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.model;
+package apijson.model;
 
 import apijson.MethodAccess;
 import apijson.framework.BaseModel;
@@ -68,8 +68,9 @@ public class User extends BaseModel implements Visitor<Long> {
         return name;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Integer getSex() {

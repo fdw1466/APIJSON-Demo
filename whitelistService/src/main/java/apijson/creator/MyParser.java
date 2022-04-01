@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.creator;
+package apijson.creator;
 
 import apijson.RequestMethod;
 import apijson.framework.APIJSONObjectParser;
@@ -20,28 +20,27 @@ import apijson.framework.APIJSONParser;
 import apijson.orm.SQLConfig;
 import com.alibaba.fastjson.JSONObject;
 
-
 /**
  * 请求解析器
  *
  * @author DWER
  */
-public class DemoParser extends APIJSONParser {
+public class MyParser extends APIJSONParser {
 
-    public DemoParser() {
+    public MyParser() {
         super();
     }
 
-    public DemoParser(RequestMethod method) {
+    public MyParser(RequestMethod method) {
         super(method);
     }
 
-    public DemoParser(RequestMethod method, boolean needVerify) {
+    public MyParser(RequestMethod method, boolean needVerify) {
         super(method, needVerify);
     }
 
     /**
-     * 可重写来设置最大查询数量
+     * 设置最大查询数量
      *
      * @return
      */
@@ -50,10 +49,20 @@ public class DemoParser extends APIJSONParser {
         return 200;
     }
 
+    /**
+     * 设置最大更新数量
+     *
+     * @return
+     */
+    @Override
+    public int getMaxUpdateCount() {
+        return 200;
+    }
+
     @Override
     public APIJSONObjectParser createObjectParser(JSONObject request, String parentPath, SQLConfig arrayConfig
-            , boolean isSubquery, boolean isTable, boolean isArrayMainTable) throws Exception {
-        return new DemoObjectParser(getSession(), request, parentPath, arrayConfig, isSubquery, isTable, isArrayMainTable)
+            , boolean isSubQuery, boolean isTable, boolean isArrayMainTable) throws Exception {
+        return new MyObjectParser(getSession(), request, parentPath, arrayConfig, isSubQuery, isTable, isArrayMainTable)
                 .setMethod(getMethod()).setParser(this);
     }
 }

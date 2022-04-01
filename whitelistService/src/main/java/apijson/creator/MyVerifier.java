@@ -12,26 +12,29 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.config;
+package apijson.creator;
 
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
- 
-import javax.sql.DataSource;
+import apijson.framework.APIJSONVerifier;
+import apijson.orm.SQLConfig;
 
 
-/**数据源配置，对应 application.yml 的数据库连接池 datasource 配置
- * @author Lemon
+/**
+ * 权限验证器
+ *
+ * @author DWER
  */
-@Configuration
-public class DemoDataSourceConfig {
-	
-	  @Bean
-	  @ConfigurationProperties(prefix = "spring.datasource.hikari")
-	  public DataSource dataSource() {
-	      return new HikariDataSource();
-	  }
- 
+public class MyVerifier extends APIJSONVerifier {
+    public static final String TAG = "DemoVerifier";
+
+    /**
+     * 重写方法来自定义字段名等
+     *
+     * @param config
+     * @return
+     */
+    @Override
+    public String getVisitorIdKey(SQLConfig config) {
+        return "user_id";
+    }
+
 }

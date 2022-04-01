@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.creator;
+package apijson.creator;
 
 import apijson.JSONResponse;
 import apijson.NotNull;
@@ -35,14 +35,14 @@ import java.util.Collection;
  *
  * @author DWER
  */
-public class DemoFunctionParser extends APIJSONFunctionParser {
-    public static final String TAG = "DemoFunctionParser";
+public class MyFunctionParser extends APIJSONFunctionParser {
+    public static final String TAG = "MyFunctionParser";
 
-    public DemoFunctionParser() {
+    public MyFunctionParser() {
         this(null, null, 0, null, null);
     }
 
-    public DemoFunctionParser(RequestMethod method, String tag, int version, JSONObject request, HttpSession session) {
+    public MyFunctionParser(RequestMethod method, String tag, int version, JSONObject request, HttpSession session) {
         super(method, tag, version, request, session);
     }
 
@@ -121,7 +121,7 @@ public class DemoFunctionParser extends APIJSONFunctionParser {
         request.put("Comment", comment);
         //Comment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-        JSONObject rp = new DemoParser(RequestMethod.DELETE).setNeedVerify(false).parseResponse(request);
+        JSONObject rp = new MyParser(RequestMethod.DELETE).setNeedVerify(false).parseResponse(request);
 
         JSONObject c = rp.getJSONObject("Comment");
         return c == null ? 0 : c.getIntValue(JSONResponse.KEY_COUNT);
@@ -152,7 +152,7 @@ public class DemoFunctionParser extends APIJSONFunctionParser {
         request.put("Comment", comment);
         //Comment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-        JSONObject rp = new DemoParser(RequestMethod.DELETE).setNeedVerify(false).parseResponse(request);
+        JSONObject rp = new MyParser(RequestMethod.DELETE).setNeedVerify(false).parseResponse(request);
 
         JSONObject c = rp.getJSONObject("Comment");
         return c == null ? 0 : c.getIntValue(JSONResponse.KEY_COUNT);
@@ -178,7 +178,7 @@ public class DemoFunctionParser extends APIJSONFunctionParser {
         request.putAll(idItem.toArray(0, 0, "Comment-id"));
         //Comment-id[]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-        JSONObject rp = new DemoParser().setNeedVerify(false).parseResponse(request);
+        JSONObject rp = new MyParser().setNeedVerify(false).parseResponse(request);
 
         JSONArray a = rp.getJSONArray("Comment-id[]");
         if (a != null) {
@@ -220,7 +220,7 @@ public class DemoFunctionParser extends APIJSONFunctionParser {
     public Object verifyAccess(@NotNull JSONObject current) throws Exception {
         long userId = current.getLongValue(JSONRequest.KEY_USER_ID);
         String role = current.getString(JSONRequest.KEY_ROLE);
-        if (AbstractVerifier.OWNER.equals(role) && userId != DemoVerifier.getVisitorId(getSession())) {
+        if (AbstractVerifier.OWNER.equals(role) && userId != MyVerifier.getVisitorId(getSession())) {
             throw new IllegalAccessException("登录用户与角色OWNER不匹配！");
         }
         return null;

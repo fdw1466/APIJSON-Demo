@@ -12,11 +12,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.creator;
+package apijson.creator;
 
 import apijson.RequestMethod;
-import apijson.demo.model.Privacy;
-import apijson.demo.model.User;
+import apijson.model.Privacy;
+import apijson.model.User;
 import apijson.framework.APIJSONSQLConfig;
 import apijson.orm.AbstractSQLConfig;
 import apijson.orm.model.Access;
@@ -33,7 +33,7 @@ import static apijson.framework.APIJSONConstant.*;
  *
  * @author DWER
  */
-public class DemoSQLConfig extends APIJSONSQLConfig {
+public class MySQLConfig extends APIJSONSQLConfig {
 
     static {
         // TODO 默认数据库类型，改成你自己的
@@ -56,7 +56,7 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
 
             @Override
             public AbstractSQLConfig getSQLConfig(RequestMethod method, String database, String schema, String table) {
-                return new DemoSQLConfig(method, table);
+                return new MySQLConfig(method, table);
             }
 
             //取消注释来实现自定义各个表的主键名
@@ -87,11 +87,11 @@ public class DemoSQLConfig extends APIJSONSQLConfig {
         };
     }
 
-    public DemoSQLConfig() {
+    public MySQLConfig() {
         super();
     }
 
-    public DemoSQLConfig(RequestMethod method, String table) {
+    public MySQLConfig(RequestMethod method, String table) {
         super(method, table);
     }
 

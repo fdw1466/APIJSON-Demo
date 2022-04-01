@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package apijson.demo.creator;
+package apijson.creator;
 
 import apijson.NotNull;
 import apijson.RequestMethod;
@@ -30,17 +30,17 @@ import java.util.List;
  *
  * @author DWER
  */
-public class DemoObjectParser extends APIJSONObjectParser {
+public class MyObjectParser extends APIJSONObjectParser {
 
-    public DemoObjectParser(HttpSession session, @NotNull JSONObject request, String parentPath, SQLConfig arrayConfig
-            , boolean isSubquery, boolean isTable, boolean isArrayMainTable) throws Exception {
-        super(session, request, parentPath, arrayConfig, isSubquery, isTable, isArrayMainTable);
+    public MyObjectParser(HttpSession session, @NotNull JSONObject request, String parentPath, SQLConfig arrayConfig
+            , boolean isSubQuery, boolean isTable, boolean isArrayMainTable) throws Exception {
+        super(session, request, parentPath, arrayConfig, isSubQuery, isTable, isArrayMainTable);
     }
 
     @Override
     public SQLConfig newSQLConfig(RequestMethod method, String table, String alias, JSONObject request, List<Join> joinList,
                                   boolean isProcedure) throws Exception {
-        return DemoSQLConfig.newSQLConfig(method, table, alias, request, joinList, isProcedure);
+        return MySQLConfig.newSQLConfig(method, table, alias, request, joinList, isProcedure);
     }
 
 }
