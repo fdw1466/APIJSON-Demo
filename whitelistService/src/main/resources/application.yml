@@ -1,5 +1,5 @@
 server:
-  port: 802
+  port: 8012
   servlet:
     context-path: /whitelistService
     session:
