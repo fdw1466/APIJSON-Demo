@@ -4,16 +4,16 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="apijson-demo-hikaricp" />
-          <element id="module-output" name="brushService" />
+          <element id="module-output" name="whitelistService" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: com.github.APIJSON:apijson-framework:4.8.0" />
-          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.74" />
-          <element id="library" level="project" name="Maven: com.github.Tencent:APIJSON:4.8.0" />
+          <element id="library" level="project" name="Maven: com.github.APIJSON:apijson-framework:5.0.0" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.79" />
+          <element id="library" level="project" name="Maven: com.github.Tencent:APIJSON:5.0.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
-          <element id="library" level="project" name="Maven: com.github.TommyLemon:unitauto-java:2.6.3" />
-          <element id="library" level="project" name="Maven: com.github.TommyLemon:unitauto-jar:2.6.3" />
+          <element id="library" level="project" name="Maven: com.github.TommyLemon:unitauto-java:2.6.4" />
+          <element id="library" level="project" name="Maven: com.github.TommyLemon:unitauto-jar:2.6.4" />
           <element id="library" level="project" name="Maven: io.github.classgraph:classgraph:4.8.87" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.22" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
@@ -41,6 +41,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.4" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-parameter-names:2.11.4" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:2.4.2" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:9.0.41" />
           <element id="library" level="project" name="Maven: org.glassfish:jakarta.el:3.0.3" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:9.0.41" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.3" />
@@ -51,14 +52,9 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.3.3" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.2.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
-          <element id="library" level="project" name="Maven: com.github.APIJSON:apijson-framework:4.9.1" />
-          <element id="library" level="project" name="Maven: com.github.Tencent:APIJSON:4.9.1" />
-          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:9.0.41" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="apijson-demo-hikaricp/web/Web" />
-      <element id="javaee-facet-resources" facet="brushToolService/web/Web" />
+      <element id="javaee-facet-resources" facet="whitelistService/web/Web" />
     </root>
   </artifact>
 </component>

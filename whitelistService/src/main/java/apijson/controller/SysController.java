@@ -14,11 +14,11 @@ import apijson.utils.request.HttpRequestUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.util.LRUMap;
-import com.sun.deploy.association.RegisterFailedException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -110,7 +110,7 @@ public class SysController extends APIJSONController {
                     new MyParser(POST, false).parseResponse(new JSONRequest(new User().setName(username)))
             ).getJSONResponse(USER_);
             if (!addResp.isSuccess()) {
-                return MyParser.newErrorResult(new RegisterFailedException());
+                return MyParser.newErrorResult(new SQLException());
             }
             //添加帐号
             Privacy privacy = new Privacy(username, password);
@@ -118,7 +118,7 @@ public class SysController extends APIJSONController {
             jsonRequest.getJSONObject(PRIVACY_).put(apijson.JSONObject.KEY_USER_ID, addResp.getId());
             addResp = new JSONResponse(new MyParser(POST, false).parseResponse(jsonRequest));
             if (!addResp.isSuccess()) {
-                return MyParser.newErrorResult(new RegisterFailedException());
+                return MyParser.newErrorResult(new SQLException());
             }
             jsonRequest.getJSONObject(PRIVACY_).put(ID, addResp.getJSONResponse(PRIVACY_).getId());
             resp = new JSONResponse(jsonRequest.getJSONObject(PRIVACY_));
