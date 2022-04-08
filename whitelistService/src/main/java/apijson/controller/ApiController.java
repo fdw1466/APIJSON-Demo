@@ -86,23 +86,11 @@ public class ApiController {
             case "AuthCode":
                 jo.put("AuthCode", jo1);
                 response = new JSONResponse(new MyParser(GET, false).parseResponse(jo));
-
-                //清空授权码
-                if (response.getJSONResponse("authCode") != null) {
-                    new MyParser(DELETE, false).parseResponse(jo);
-                }
-
                 break;
             //根据终端ID获取解绑码
             case "UnbindCode":
                 jo.put("UnbindCode", jo1);
                 response = new JSONResponse(new MyParser(GET, false).parseResponse(jo));
-
-                //清空解绑码
-                if (response.getJSONResponse("unbindCode") != null) {
-                    new MyParser(DELETE, false).parseResponse(jo);
-                }
-
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + tag);
