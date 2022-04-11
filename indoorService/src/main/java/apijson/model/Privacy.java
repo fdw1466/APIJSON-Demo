@@ -76,7 +76,7 @@ public class Privacy extends BaseModel {
      * @return
      */
     @JSONField(name = "_password")
-    public String get__password() {
+    public String getPassword() {
         return password;
     }
 

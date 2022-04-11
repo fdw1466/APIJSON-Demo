@@ -9,21 +9,19 @@ import apijson.framework.APIJSONController;
 import apijson.model.Privacy;
 import apijson.model.User;
 import apijson.orm.JSONRequest;
-import apijson.utils.PropertyUtil;
-import apijson.utils.request.HttpRequestUtil;
-import com.alibaba.fastjson.JSON;
+import apijson.orm.exception.ConditionErrorException;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.util.LRUMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.net.URLEncoder;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import static apijson.RequestMethod.GET;
-import static apijson.RequestMethod.POST;
+import static apijson.RequestMethod.*;
 import static apijson.framework.APIJSONConstant.*;
 
 /**
@@ -68,8 +66,8 @@ public class SysController extends APIJSONController {
      * 登录
      *
      * @param request {
-     *                "username": "admin", //网管帐号
-     *                "password": "123456", //网管密码
+     *                "username": "admin", //帐号
+     *                "password": "123456", //密码（MD5加密）
      *                }
      * @return
      */
@@ -86,46 +84,30 @@ public class SysController extends APIJSONController {
             return MyParser.extendErrorResult(requestObject, e);
         }
 
-        //通过调度接口校验帐号密码
-        JSONObject jsonObject;
-        try {
-            String param = "username=" + URLEncoder.encode(username, "UTF-8") + "&password=" + URLEncoder.encode(password, "UTF-8");
-            String url = PropertyUtil.getProperty("ds_url") + "/nms/login?" + param;
-            jsonObject = JSON.parseObject(HttpRequestUtil.sendRequest(url, RequestMethod.GET.name(), null));
-        } catch (Exception e) {
-            return MyParser.newErrorResult(e);
-        }
-        if (!"0".equals(jsonObject.getString("code"))) {
-            return MyParser.newResult(jsonObject.getIntValue("code"), jsonObject.getString("desc"));
-        }
-
         //获取帐号
         JSONResponse resp = new JSONResponse(
-                new MyParser(GET, false).parseResponse(new JSONRequest(new Privacy().setUsername(username)))
+                new MyParser(GETS, false).parseResponse(new JSONRequest(new Privacy().setUsername(username)))
         ).getJSONResponse(PRIVACY_);
-        //帐号未注册，需自动注册
+        //帐号不存在
         if (resp == null) {
-            //添加用户
-            JSONResponse addResp = new JSONResponse(
-                    new MyParser(POST, false).parseResponse(new JSONRequest(new User().setName(username)))
-            ).getJSONResponse(USER_);
-            if (!addResp.isSuccess()) {
-                return MyParser.newErrorResult(new SQLException());
-            }
-            //添加帐号
-            Privacy privacy = new Privacy(username, password);
-            JSONRequest jsonRequest = new JSONRequest(privacy);
-            jsonRequest.getJSONObject(PRIVACY_).put(apijson.JSONObject.KEY_USER_ID, addResp.getId());
-            addResp = new JSONResponse(new MyParser(POST, false).parseResponse(jsonRequest));
-            if (!addResp.isSuccess()) {
-                return MyParser.newErrorResult(new SQLException());
-            }
-            jsonRequest.getJSONObject(PRIVACY_).put(ID, addResp.getJSONResponse(PRIVACY_).getId());
-            resp = new JSONResponse(jsonRequest.getJSONObject(PRIVACY_));
+            return MyParser.newErrorResult(new ConditionErrorException("帐号或密码错误"));
+        }
+        Privacy privacy = resp.toJavaObject(Privacy.class);
+        if (privacy == null) {
+            return MyParser.newErrorResult(new ConditionErrorException("帐号或密码错误"));
+        }
+
+        //校验密码
+        resp = new JSONResponse(
+                new MyParser(HEADS, false).parseResponse(
+                        new JSONRequest(new Privacy(privacy.getId()).setPassword(password))
+                )
+        ).getJSONResponse(PRIVACY_);
+        if (!JSONResponse.isExist(resp)) {
+            return MyParser.newErrorResult(new ConditionErrorException("账号或密码错误"));
         }
 
         //查询用户信息
-        Privacy privacy = resp.toJavaObject(Privacy.class);
         resp = new JSONResponse(new MyParser(GET, false).parseResponse(new JSONRequest(new User(privacy.getUserId()))));
         User user = resp.getObject(User.class);
         if (user == null) {
@@ -136,8 +118,9 @@ public class SysController extends APIJSONController {
         super.login(session, user, 1, null, null);
         SESSION_MAP.put(session.getId(), session);
         Log.d(TAG, "login userId = " + user.getId() + "; session.getId() = " + session.getId());
+
         //用户id
-        session.setAttribute(USER_ID, user.getId());
+        session.setAttribute(USER_ID, user.getCustomerId());
         //用户基本信息
         session.setAttribute(USER_, user);
         //用户隐私信息

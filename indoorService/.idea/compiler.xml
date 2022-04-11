@@ -11,6 +11,7 @@
         <module name="flashToolService" />
         <module name="brushService" />
         <module name="whitelistService" />
+        <module name="indoorService" />
       </profile>
     </annotationProcessing>
   </component>

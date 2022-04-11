@@ -1,7 +1,7 @@
 server:
-  port: 8012
+  port: 8013
   servlet:
-    context-path: /whitelistService
+    context-path: /indoorService
     session:
       cookie:
         secure: true
@@ -10,9 +10,9 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      jdbc-url: jdbc:mysql://183.47.46.244:3306?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      jdbc-url: jdbc:mysql://192.168.5.222:3306?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
-      password: kirisun
+      password: maridb1201
       minimum-idle: 5
       idle-timeout: 600000
       maximum-pool-size: 10

@@ -97,7 +97,7 @@ public class Application extends SpringBootServletInitializer
             //初始化
             APIJSONApplication.init(false);
             //全局修改KEY_USER_ID
-            JSONObject.KEY_USER_ID = "user_id";
+            JSONObject.KEY_USER_ID = "customer_id";
             //调试模式
             Log.DEBUG = "1".equals(PropertyUtil.getProperty("debug"));
         } catch (Exception e) {

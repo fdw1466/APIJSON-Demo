@@ -17,6 +17,7 @@ package apijson.model;
 import apijson.MethodAccess;
 import apijson.framework.BaseModel;
 import apijson.orm.Visitor;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.List;
 
@@ -44,13 +45,25 @@ public class User extends BaseModel implements Visitor<Long> {
      */
     private String name;
     /**
-     * 性别
+     * 头像
      */
-    private Integer sex;
+    private String avatar;
     /**
-     * 年龄
+     * 邮箱
      */
-    private Integer age;
+    private String email;
+    /**
+     * 可用：0否，1是
+     */
+    private Integer enable;
+    /**
+     * 所属客户
+     */
+    private Integer customerId;
+    /**
+     * 角色
+     */
+    private Integer roleId;
 
     /**
      * 默认构造方法，JSON等解析时必须要有
@@ -73,20 +86,46 @@ public class User extends BaseModel implements Visitor<Long> {
         return this;
     }
 
-    public Integer getSex() {
-        return sex;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
+
+    @JSONField(name = "customer_id")
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    @JSONField(name = "role_id")
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     @Override
