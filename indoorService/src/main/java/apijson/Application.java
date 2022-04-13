@@ -18,7 +18,7 @@ import apijson.creator.*;
 import apijson.framework.APIJSONApplication;
 import apijson.framework.APIJSONCreator;
 import apijson.orm.*;
-import apijson.utils.PropertyUtil;
+import apijson.common.utils.PropertyUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

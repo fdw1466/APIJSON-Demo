@@ -4,12 +4,11 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="whitelistService" />
+          <element id="module-output" name="indoorService" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.github.APIJSON:apijson-framework:5.0.0" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
-          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.79" />
           <element id="library" level="project" name="Maven: com.github.Tencent:APIJSON:5.0.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
           <element id="library" level="project" name="Maven: com.github.TommyLemon:unitauto-java:2.6.4" />
@@ -52,9 +51,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.3.3" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.2.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.73" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="whitelistService/web/Web" />
+      <element id="javaee-facet-resources" facet="indoorService/web/Web" />
     </root>
   </artifact>
 </component>

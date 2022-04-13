@@ -1,4 +1,4 @@
-package apijson.utils.request;
+package apijson.common.utils.request;
 
 import com.alibaba.fastjson.JSONObject;
 

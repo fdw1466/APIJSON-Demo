@@ -14,7 +14,10 @@ limitations under the License.*/
 
 package apijson.creator;
 
+import apijson.JSONObject;
+import apijson.common.constant.CommonConstant;
 import apijson.framework.APIJSONVerifier;
+import apijson.model.User;
 import apijson.orm.SQLConfig;
 
 
@@ -24,17 +27,27 @@ import apijson.orm.SQLConfig;
  * @author DWER
  */
 public class MyVerifier extends APIJSONVerifier {
-    public static final String TAG = "DemoVerifier";
+    public static final String TAG = "MyVerifier";
 
     /**
-     * 重写方法来自定义字段名等
+     * 自定义字段名等
      *
      * @param config
      * @return
      */
     @Override
     public String getVisitorIdKey(SQLConfig config) {
-        return "user_id";
+        return JSONObject.KEY_USER_ID;
     }
 
+    /**
+     * 校验管理员
+     */
+    @Override
+    public void verifyAdmin() {
+        Integer roleId = ((User) this.visitor).getRoleId();
+        if (roleId == null || roleId != CommonConstant.ROLE_ADMIN) {
+            throw new IllegalArgumentException("请勿伪造[" + ADMIN + "]角色");
+        }
+    }
 }

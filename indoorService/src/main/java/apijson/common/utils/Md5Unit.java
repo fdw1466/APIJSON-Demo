@@ -1,9 +1,14 @@
-package apijson.utils;
+package apijson.common.utils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public class MD5Unit {
+/**
+ * MD5工具类
+ *
+ * @author DWER
+ */
+public class Md5Unit {
 
     /**
      * string转md5
@@ -11,7 +16,7 @@ public class MD5Unit {
      * @param str
      * @return
      */
-    public static String getMD5(String str) {
+    public static String getMd5(String str) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(str.getBytes(StandardCharsets.UTF_8));
@@ -40,6 +45,6 @@ public class MD5Unit {
     }
 
     public static void main(String[] args) {
-        System.out.println(getMD5("123456"));
+        System.out.println(getMd5("123456"));
     }
 }

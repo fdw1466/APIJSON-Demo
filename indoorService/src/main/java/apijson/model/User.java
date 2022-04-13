@@ -36,10 +36,6 @@ import static apijson.orm.AbstractVerifier.UNKNOWN;
 public class User extends BaseModel implements Visitor<Long> {
     private static final long serialVersionUID = 1L;
 
-    public static final int SEX_MAIL = 0;
-    public static final int SEX_FEMALE = 1;
-    public static final int SEX_UNKNOWN = 2;
-
     /**
      * 姓名
      */

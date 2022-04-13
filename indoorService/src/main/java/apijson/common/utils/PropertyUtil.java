@@ -1,4 +1,4 @@
-package apijson.utils;
+package apijson.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,8 @@ import java.util.Properties;
 
 /**
  * properties文件获取工具类
+ *
+ * @author DWER
  */
 public class PropertyUtil {
     private static final Logger logger = LoggerFactory.getLogger(PropertyUtil.class);

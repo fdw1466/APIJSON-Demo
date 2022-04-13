@@ -20,6 +20,8 @@ import apijson.framework.APIJSONParser;
 import apijson.orm.SQLConfig;
 import com.alibaba.fastjson.JSONObject;
 
+import static apijson.framework.APIJSONConstant.USER_;
+
 /**
  * 请求解析器
  *
@@ -59,10 +61,23 @@ public class MyParser extends APIJSONParser {
         return 200;
     }
 
+    /**
+     * 自定义解析器
+     *
+     * @param request
+     * @param parentPath
+     * @param arrayConfig
+     * @param isSubQuery
+     * @param isTable
+     * @param isArrayMainTable
+     * @return
+     * @throws Exception
+     */
     @Override
     public APIJSONObjectParser createObjectParser(JSONObject request, String parentPath, SQLConfig arrayConfig
             , boolean isSubQuery, boolean isTable, boolean isArrayMainTable) throws Exception {
         return new MyObjectParser(getSession(), request, parentPath, arrayConfig, isSubQuery, isTable, isArrayMainTable)
                 .setMethod(getMethod()).setParser(this);
     }
+
 }

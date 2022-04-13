@@ -1,4 +1,4 @@
-package apijson.utils.request;
+package apijson.common.utils.request;
 
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;

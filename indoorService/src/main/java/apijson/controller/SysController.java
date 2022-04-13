@@ -3,6 +3,8 @@ package apijson.controller;
 import apijson.JSONResponse;
 import apijson.Log;
 import apijson.StringUtil;
+import apijson.common.constant.CommonConstant;
+import apijson.common.utils.LogUtil;
 import apijson.creator.MyParser;
 import apijson.creator.MyVerifier;
 import apijson.framework.APIJSONController;
@@ -128,6 +130,9 @@ public class SysController extends APIJSONController {
         //设置session过期时间
         session.setMaxInactiveInterval(60 * 60 * 24);
 
+        //保存日志
+        LogUtil.saveLog(user, CommonConstant.OPERATE_TYPE_LOGIN, "Sign in");
+
         return resp;
     }
 
@@ -147,10 +152,14 @@ public class SysController extends APIJSONController {
             super.logout(session);
             SESSION_MAP.remove(session.getId());
             Log.d(TAG, "logout userId = " + userId + "; session.getId() = " + session.getId());
+
+            //保存日志
+            LogUtil.saveLog((User) session.getAttribute(USER_), CommonConstant.OPERATE_TYPE_LOGIN, "Sign out");
         } catch (Exception e) {
             return MyParser.newErrorResult(e);
         }
 
+        //封装返回值
         JSONObject result = MyParser.newSuccessResult();
         JSONObject user = MyParser.newSuccessResult();
         user.put(ID, userId);
