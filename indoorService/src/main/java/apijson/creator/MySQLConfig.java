@@ -47,9 +47,6 @@ public class MySQLConfig extends APIJSONSQLConfig {
         TABLE_KEY_MAP.put(Access.class.getSimpleName(), "sys_access");
         TABLE_KEY_MAP.put(Request.class.getSimpleName(), "sys_request");
         TABLE_KEY_MAP.put(Function.class.getSimpleName(), "sys_function");
-        TABLE_KEY_MAP.put(User.class.getSimpleName(), "sys_user");
-        TABLE_KEY_MAP.put(Privacy.class.getSimpleName(), "sys_privacy");
-        TABLE_KEY_MAP.put(Log.class.getSimpleName(), "sys_log");
 
         //主键名映射
         SIMPLE_CALLBACK = new SimpleCallback() {
