@@ -20,8 +20,6 @@ import apijson.framework.APIJSONParser;
 import apijson.orm.SQLConfig;
 import com.alibaba.fastjson.JSONObject;
 
-import static apijson.framework.APIJSONConstant.USER_;
-
 /**
  * 请求解析器
  *

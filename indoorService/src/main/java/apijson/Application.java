@@ -14,11 +14,11 @@ limitations under the License.*/
 
 package apijson;
 
+import apijson.common.utils.PropertyUtil;
 import apijson.creator.*;
 import apijson.framework.APIJSONApplication;
 import apijson.framework.APIJSONCreator;
 import apijson.orm.*;
-import apijson.common.utils.PropertyUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,10 +28,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * SpringBootApplication
@@ -39,7 +35,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @author DWER
  */
-@Configuration
 @SpringBootApplication
 @EnableConfigurationProperties
 public class Application extends SpringBootServletInitializer
@@ -53,10 +48,6 @@ public class Application extends SpringBootServletInitializer
 
     public static ApplicationContext getApplicationContext() {
         return APPLICATION_CONTEXT;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
     }
 
     @Override
@@ -105,22 +96,7 @@ public class Application extends SpringBootServletInitializer
         }
     }
 
-    /**
-     * 支持 APIAuto 中 JavaScript 代码跨域请求
-     *
-     * @return
-     */
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
-                        .allowedMethods("*")
-                        .allowCredentials(true)
-                        .maxAge(3600);
-            }
-        };
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 }

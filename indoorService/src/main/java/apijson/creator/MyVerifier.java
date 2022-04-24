@@ -41,7 +41,7 @@ public class MyVerifier extends APIJSONVerifier {
     }
 
     /**
-     * 校验管理员
+     * 自定义校验管理员
      */
     @Override
     public void verifyAdmin() {

@@ -24,7 +24,14 @@
 			<artifactId>apijson-framework</artifactId>
 			<version>LATEST</version>
 		</dependency>
-		
+
+		<!-- 需要用的 SpringBoot 框架，1.4.0 以上 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+
 		<!-- 需要用的数据库 JDBC 驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -38,13 +45,6 @@
 		</dependency>
 		<!-- Oracle, SQLServer 等其它数据库的 JDBC 驱动，可以在这里加上 Maven 依赖或 libs 目录放 Jar 包并依赖 -->
 
-		<!-- 需要用的 SpringBoot 框架，1.4.0 以上 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.4.2</version>
-		</dependency>
-		
 		<!-- 需要用的 HikariCp 数据库连接池库，3.1.0 以上 -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>

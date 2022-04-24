@@ -1,7 +1,6 @@
 package apijson.controller;
 
 import apijson.JSONResponse;
-import apijson.Log;
 import apijson.StringUtil;
 import apijson.common.constant.CommonConstant;
 import apijson.common.utils.LogUtil;
@@ -13,15 +12,12 @@ import apijson.model.User;
 import apijson.orm.JSONRequest;
 import apijson.orm.exception.ConditionErrorException;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.LRUMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
 
 import static apijson.RequestMethod.*;
 import static apijson.framework.APIJSONConstant.*;
@@ -34,35 +30,6 @@ import static apijson.framework.APIJSONConstant.*;
 @RestController
 @RequestMapping("sys")
 public class SysController extends APIJSONController {
-    public static final SessionMap SESSION_MAP;
-    public static final List<String> EXCEPT_HEADER_LIST;
-
-    static {
-        SESSION_MAP = new SessionMap();
-        //accept-encoding 在某些情况下导致乱码，origin 和 sec-fetch-mode 等 CORS 信息导致服务器代理失败
-        EXCEPT_HEADER_LIST = Arrays.asList(
-                "accept-encoding",
-                "accept-language",
-                "host",
-                "origin",
-                "referer",
-                "user-agent",
-                "sec-fetch-mode",
-                "sec-fetch-site",
-                "sec-fetch-dest",
-                "sec-fetch-user"
-        );
-    }
-
-    public static class SessionMap extends LRUMap<String, HttpSession> {
-        public SessionMap() {
-            super(16, 1000000);
-        }
-
-        public void remove(String key) {
-            _map.remove(key);
-        }
-    }
 
     /**
      * 登录
@@ -118,9 +85,6 @@ public class SysController extends APIJSONController {
 
         //登录状态保存至session
         super.login(session, user, 1, null, null);
-        SESSION_MAP.put(session.getId(), session);
-        Log.d(TAG, "login userId = " + user.getId() + "; session.getId() = " + session.getId());
-
         //用户id
         session.setAttribute(USER_ID, user.getCustomerId());
         //用户基本信息
@@ -149,12 +113,11 @@ public class SysController extends APIJSONController {
         try {
             //必须在session.invalidate()前！
             userId = MyVerifier.getVisitorId(session);
+            User user = (User) session.getAttribute(USER_);
             super.logout(session);
-            SESSION_MAP.remove(session.getId());
-            Log.d(TAG, "logout userId = " + userId + "; session.getId() = " + session.getId());
 
             //保存日志
-            LogUtil.saveLog((User) session.getAttribute(USER_), CommonConstant.OPERATE_TYPE_LOGIN, "Sign out");
+            LogUtil.saveLog(user, CommonConstant.OPERATE_TYPE_LOGIN, "Sign out");
         } catch (Exception e) {
             return MyParser.newErrorResult(e);
         }
