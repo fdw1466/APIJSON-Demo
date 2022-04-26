@@ -29,7 +29,7 @@ import java.sql.Connection;
  * @author DWER
  */
 public class MySQLExecutor extends APIJSONSQLExecutor {
-    public static final String TAG = "DemoSQLExecutor";
+    public static final String TAG = "MySQLExecutor";
 
     /**
      * 适配连接池，如果这里能拿到连接池的有效 Connection，则 SQLConfig 不需要配置 dbVersion, dbUri, dbAccount, dbPassword

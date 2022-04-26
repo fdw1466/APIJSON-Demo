@@ -6,7 +6,6 @@ import apijson.common.constant.CommonConstant;
 import apijson.common.utils.LogUtil;
 import apijson.creator.MyParser;
 import apijson.creator.MyVerifier;
-import apijson.framework.APIJSONController;
 import apijson.model.Privacy;
 import apijson.model.User;
 import apijson.orm.JSONRequest;
@@ -29,7 +28,7 @@ import static apijson.framework.APIJSONConstant.*;
  */
 @RestController
 @RequestMapping("sys")
-public class SysController extends APIJSONController {
+public class SysController extends BaseController {
 
     /**
      * 登录

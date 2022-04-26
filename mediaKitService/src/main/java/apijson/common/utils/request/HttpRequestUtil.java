@@ -6,10 +6,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -132,6 +129,36 @@ public class HttpRequestUtil {
             resp.append(line);
         }
         return resp.toString();
+    }
+
+    /**
+     * HTTP请求
+     *
+     * @param requestUrl    请求地址
+     * @param requestMethod 请求方法
+     * @param requestHeader 请求头
+     * @param data          请求参数
+     * @return json格式数据
+     * @throws Exception
+     */
+    public static InputStream streamHttpRequest(String requestUrl, String requestMethod, Map<String, String> requestHeader, Map<String, Object> data) throws Exception {
+        URL url = new URL(requestUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod(requestMethod);
+        conn.setRequestProperty("Content-type", "application/json");
+        conn.setDoOutput(true);
+        //设置请求头
+        if (requestHeader != null) {
+            requestHeader.keySet().forEach(key -> conn.setRequestProperty(key, requestHeader.get(key)));
+        }
+        //往服务器端写内容
+        if (data != null) {
+            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
+            out.write(JSONObject.toJSONString(data));
+            out.flush();
+            out.close();
+        }
+        return conn.getInputStream();
     }
 }
 
