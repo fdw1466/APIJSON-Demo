@@ -47,16 +47,18 @@ public class ApiController extends BaseController {
         } catch (Exception e) {
             return MyParser.extendErrorResult(requestObject, e);
         }
+        if (sn == null || pwd == null) {
+            return MyParser.newErrorResult(new ConditionErrorException("SN或密码不能为空"));
+        }
 
         //获取设备
         JSONObject device = new JSONObject();
         device.put("sn", sn);
         device.put("pwd", pwd);
-        JSONResponse resp = new JSONResponse(new MyParser(GETS, false).parseResponse(
-                new JSONRequest("Device", device))
-        ).getJSONResponse("Device");
-        //设备不存在
-        if (resp == null) {
+        JSONResponse resp = new JSONResponse(new MyParser(GETS, false).parseResponse(new JSONRequest("Device", device)));
+        System.out.println(resp);
+        JSONResponse deviceResp = resp.getJSONResponse("Device");
+        if (deviceResp == null) {
             return MyParser.newErrorResult(new ConditionErrorException("SN或密码错误"));
         }
 
