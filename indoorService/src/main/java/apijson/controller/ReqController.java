@@ -159,7 +159,9 @@ public class ReqController extends APIJSONController {
                 JSONObject jsonRequest = JSONObject.parseObject(request);
                 if (POST.name().equals(method.name())) {
                     String tag = jsonRequest.getString(APIJSONConstant.TAG);
-                    jsonRequest.getJSONObject(tag).put("id", jsonResponse.getJSONResponse(tag).getId());
+                    if (jsonRequest.getJSONObject(tag) != null) {
+                        jsonRequest.getJSONObject(tag).put("id", jsonResponse.getJSONResponse(tag).getId());
+                    }
                 }
 
                 //保存日志

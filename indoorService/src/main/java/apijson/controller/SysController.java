@@ -52,6 +52,9 @@ public class SysController extends APIJSONController {
         } catch (Exception e) {
             return MyParser.extendErrorResult(requestObject, e);
         }
+        if (username == null || password == null) {
+            return MyParser.newErrorResult(new ConditionErrorException("帐号或密码不能为空"));
+        }
 
         //获取帐号
         JSONResponse resp = new JSONResponse(
