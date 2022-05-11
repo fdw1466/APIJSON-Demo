@@ -196,35 +196,4 @@ public class MyFunctionParser extends APIJSONFunctionParser {
 
         return arr;
     }
-
-
-    /**
-     * TODO 仅用来测试 "key-()":"getIdList()" 和 "key()":"getIdList()"
-     *
-     * @param current
-     * @return JSONArray 只能用JSONArray，用long[]会在SQLConfig解析崩溃
-     * @throws Exception
-     */
-    public JSONArray getIdList(@NotNull JSONObject current) {
-        return new JSONArray(new ArrayList<Object>(Arrays.asList(12, 15, 301, 82001, 82002, 38710)));
-    }
-
-
-    /**
-     * TODO 仅用来测试 "key-()":"verifyAccess()"
-     *
-     * @param current
-     * @return
-     * @throws Exception
-     */
-    public Object verifyAccess(@NotNull JSONObject current) throws Exception {
-        long userId = current.getLongValue(JSONRequest.KEY_USER_ID);
-        String role = current.getString(JSONRequest.KEY_ROLE);
-        if (AbstractVerifier.OWNER.equals(role) && userId != MyVerifier.getVisitorId(getSession())) {
-            throw new IllegalAccessException("登录用户与角色OWNER不匹配！");
-        }
-        return null;
-    }
-
-
 }
