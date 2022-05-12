@@ -33,4 +33,10 @@ public interface CommonConstant {
      * 普通客户
      */
     int ROLE_CUSTOMER = 2;
+
+    ////////////////////////Redis前缀////////////////////////
+    /**
+     * 用户信息前缀
+     */
+    String PREFIX_USER = "PREFIX_USER_";
 }

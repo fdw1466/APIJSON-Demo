@@ -1,11 +1,14 @@
 package apijson.controller;
 
 import apijson.JSONResponse;
+import apijson.common.constant.CommonConstant;
+import apijson.common.utils.RedisUtil;
 import apijson.creator.MyParser;
 import apijson.model.User;
 import apijson.orm.JSONRequest;
 import apijson.orm.exception.ConditionErrorException;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,9 @@ import static apijson.framework.APIJSONConstant.USER_ID;
 @RestController
 @RequestMapping("api")
 public class ApiController extends BaseController {
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * 登录
@@ -56,7 +62,6 @@ public class ApiController extends BaseController {
         device.put("sn", sn);
         device.put("pwd", pwd);
         JSONResponse resp = new JSONResponse(new MyParser(GETS, false).parseResponse(new JSONRequest("Device", device)));
-        System.out.println(resp);
         JSONResponse deviceResp = resp.getJSONResponse("Device");
         if (deviceResp == null) {
             return MyParser.newErrorResult(new ConditionErrorException("SN或密码错误"));
@@ -76,6 +81,9 @@ public class ApiController extends BaseController {
         session.setAttribute(USER_, user);
         //设置session过期时间
         session.setMaxInactiveInterval(60 * 60 * 24);
+
+        //将用户信息保存到redis
+        redisUtil.set(CommonConstant.PREFIX_USER + sn, deviceResp.toJSONString());
 
         return resp;
     }
