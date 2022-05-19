@@ -67,13 +67,18 @@ public class ApiController extends BaseController {
             return MyParser.newErrorResult(new ConditionErrorException("SN或密码错误"));
         }
 
+        //校验使用状态
+        if (deviceResp.getInteger("available") != CommonConstant.USE_STATE_ENABLE) {
+            return MyParser.newErrorResult(new ConditionErrorException("设备未启用"));
+        }
+
         //登录状态保存至session
         User user = new User();
-        user.setId(resp.getId());
+        user.setId(deviceResp.getId());
         //标识为设备
         user.setRoleId(0);
-        user.setName(resp.getString("name"));
-        user.setCustomerId(resp.getInteger("customer_id"));
+        user.setName(deviceResp.getString("name"));
+        user.setCustomerId(deviceResp.getInteger("customer_id"));
         super.login(session, user, 1, null, null);
         //用户id
         session.setAttribute(USER_ID, user.getCustomerId());

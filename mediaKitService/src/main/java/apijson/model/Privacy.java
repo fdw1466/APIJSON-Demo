@@ -14,23 +14,14 @@ limitations under the License.*/
 
 package apijson.model;
 
-import apijson.MethodAccess;
 import apijson.framework.BaseModel;
 import com.alibaba.fastjson.annotation.JSONField;
-
-import static apijson.orm.AbstractVerifier.*;
 
 /**
  * 用户隐私信息
  *
  * @author DWER
  */
-@MethodAccess(
-        GET = {},
-        GETS = {OWNER, ADMIN},
-        POST = {UNKNOWN, ADMIN},
-        DELETE = {ADMIN}
-)
 public class Privacy extends BaseModel {
     private static final long serialVersionUID = 1L;
 

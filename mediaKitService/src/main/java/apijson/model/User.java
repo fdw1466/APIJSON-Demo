@@ -14,25 +14,17 @@ limitations under the License.*/
 
 package apijson.model;
 
-import apijson.MethodAccess;
 import apijson.framework.BaseModel;
 import apijson.orm.Visitor;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.List;
 
-import static apijson.orm.AbstractVerifier.ADMIN;
-import static apijson.orm.AbstractVerifier.UNKNOWN;
-
 /**
  * 用户信息
  *
  * @author DWER
  */
-@MethodAccess(
-        POST = {UNKNOWN, ADMIN},
-        DELETE = {ADMIN}
-)
 public class User extends BaseModel implements Visitor<Long> {
     private static final long serialVersionUID = 1L;
 

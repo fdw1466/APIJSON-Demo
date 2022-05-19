@@ -6,6 +6,7 @@ import apijson.common.constant.CommonConstant;
 import apijson.common.utils.LogUtil;
 import apijson.creator.MyParser;
 import apijson.creator.MyVerifier;
+import apijson.framework.APIJSONConstant;
 import apijson.model.Privacy;
 import apijson.model.User;
 import apijson.orm.JSONRequest;
@@ -85,14 +86,22 @@ public class SysController extends BaseController {
             return MyParser.newErrorResult(new NullPointerException("服务器内部错误"));
         }
 
+        //校验使用状态
+        if (user.getEnable() != CommonConstant.USE_STATE_ENABLE) {
+            return MyParser.newErrorResult(new ConditionErrorException("账号未启用"));
+        }
+
         //登录状态保存至session
         super.login(session, user, 1, null, null);
+        //用户登录信息
+        session.setAttribute(APIJSONConstant.VISITOR_, user.setId(user.getCustomerId().longValue()));
         //用户id
-        session.setAttribute(USER_ID, user.getCustomerId());
+        session.setAttribute(USER_ID, user.getId());
         //用户基本信息
         session.setAttribute(USER_, user);
         //用户隐私信息
         session.setAttribute(PRIVACY_, privacy);
+
         //设置session过期时间
         session.setMaxInactiveInterval(60 * 60 * 24);
 
@@ -101,6 +110,7 @@ public class SysController extends BaseController {
 
         return resp;
     }
+
 
     /**
      * 登出

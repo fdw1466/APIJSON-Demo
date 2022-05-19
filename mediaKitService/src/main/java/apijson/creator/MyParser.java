@@ -60,6 +60,26 @@ public class MyParser extends APIJSONParser {
     }
 
     /**
+     * 设置最大数组数量
+     *
+     * @return
+     */
+    @Override
+    public int getMaxArrayCount() {
+        return 50;
+    }
+
+    /**
+     * 设置最大对象数
+     *
+     * @return
+     */
+    @Override
+    public int getMaxObjectCount() {
+        return 50;
+    }
+
+    /**
      * 自定义解析器
      *
      * @param request

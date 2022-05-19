@@ -30,7 +30,7 @@ public class MyVerifier extends APIJSONVerifier {
     public static final String TAG = "MyVerifier";
 
     /**
-     * 自定义字段名等
+     * 自定义字段名
      *
      * @param config
      * @return

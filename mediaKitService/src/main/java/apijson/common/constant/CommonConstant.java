@@ -26,7 +26,7 @@ public interface CommonConstant {
 
     ////////////////////////角色////////////////////////
     /**
-     * 管理员
+     * 系统管理员
      */
     int ROLE_ADMIN = 1;
     /**
@@ -39,4 +39,14 @@ public interface CommonConstant {
      * 用户信息前缀
      */
     String PREFIX_USER = "PREFIX_USER_";
+
+    ////////////////////////使用状态////////////////////////
+    /**
+     * 启用
+     */
+    int USE_STATE_ENABLE = 1;
+    /**
+     * 禁用
+     */
+    int USE_STATE_DISABLE = 0;
 }
