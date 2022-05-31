@@ -21,7 +21,7 @@ import static apijson.RequestMethod.PUT;
 public class ApiController {
 
     /**
-     * 估计IMEI或手机号获取白名单
+     * 根据IMEI或手机号获取白名单
      *
      * @param request {
      *                imei,
@@ -42,8 +42,8 @@ public class ApiController {
             return MyParser.extendErrorResult(requestObject, e);
         }
 
-        //根据IMEI获取终端ID
-        Integer terminalId;
+        //根据IMEI获取用户ID和终端ID
+        Integer userId, terminalId;
         if (StringUtil.isNotEmpty(imei)) {
             JSONObject jo = new JSONObject();
             jo.put("imei", imei);
@@ -53,9 +53,10 @@ public class ApiController {
             if (resp == null) {
                 return MyParser.newErrorResult(new NotExistException("终端不存在"));
             }
+            userId = resp.getInteger(apijson.JSONObject.KEY_USER_ID);
             terminalId = resp.getInteger(apijson.JSONObject.KEY_ID);
         }
-        //根据手机号获取终端ID
+        //根据手机号获取用户ID和终端ID
         else if (StringUtil.isNotEmpty(phone)) {
             JSONObject jo = new JSONObject();
             jo.put("phone", phone);
@@ -65,6 +66,7 @@ public class ApiController {
             if (resp == null) {
                 return MyParser.newErrorResult(new NotExistException("终端不存在"));
             }
+            userId = resp.getInteger(apijson.JSONObject.KEY_USER_ID);
             terminalId = resp.getInteger(apijson.JSONObject.KEY_ID);
         } else {
             return MyParser.newErrorResult(new IllegalArgumentException("参数错误"));
@@ -73,10 +75,10 @@ public class ApiController {
         JSONResponse response;
         JSONObject jo = new JSONObject();
         JSONObject jo1 = new JSONRequest();
-        jo1.put("terminal_id", terminalId);
         switch (tag) {
             //根据终端ID获取终端信息
             case "Terminal":
+                jo1.put("terminal_id", terminalId);
                 jo1.remove("terminal_id");
                 jo1.put("id", terminalId);
                 jo.put("Terminal", jo1);
@@ -84,6 +86,9 @@ public class ApiController {
                 break;
             //根据终端ID获取白名单
             case "Whitelist":
+                jo1.put("user_id", userId);
+                jo1.put("terminal_id", terminalId);
+                jo1.put("@combine", "user_id | terminal_id");
                 JSONObject jo2 = new JSONRequest();
                 jo2.put("Whitelist", jo1);
                 jo.put("Whitelist[]", jo2);
@@ -91,11 +96,13 @@ public class ApiController {
                 break;
             //根据终端ID获取授权码
             case "AuthCode":
+                jo1.put("terminal_id", terminalId);
                 jo.put("AuthCode", jo1);
                 response = new JSONResponse(new MyParser(GET, false).parseResponse(jo));
                 break;
             //根据终端ID获取解绑码
             case "UnbindCode":
+                jo1.put("terminal_id", terminalId);
                 jo.put("UnbindCode", jo1);
                 response = new JSONResponse(new MyParser(GET, false).parseResponse(jo));
                 break;

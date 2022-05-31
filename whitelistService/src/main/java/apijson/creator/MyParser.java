@@ -46,7 +46,7 @@ public class MyParser extends APIJSONParser {
      */
     @Override
     public int getMaxQueryCount() {
-        return 200;
+        return 3600;
     }
 
     /**
@@ -56,7 +56,27 @@ public class MyParser extends APIJSONParser {
      */
     @Override
     public int getMaxUpdateCount() {
-        return 200;
+        return 1000;
+    }
+
+    /**
+     * 设置最大数组数量
+     *
+     * @return
+     */
+    @Override
+    public int getMaxArrayCount() {
+        return 1000;
+    }
+
+    /**
+     * 设置最大对象数
+     *
+     * @return
+     */
+    @Override
+    public int getMaxObjectCount() {
+        return 1000;
     }
 
     @Override
