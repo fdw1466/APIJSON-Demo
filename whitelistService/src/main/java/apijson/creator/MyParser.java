@@ -46,7 +46,7 @@ public class MyParser extends APIJSONParser {
      */
     @Override
     public int getMaxQueryCount() {
-        return 3600;
+        return 10000;
     }
 
     /**

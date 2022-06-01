@@ -91,6 +91,8 @@ public class ApiController {
                 jo1.put("@combine", "user_id | terminal_id");
                 JSONObject jo2 = new JSONRequest();
                 jo2.put("Whitelist", jo1);
+                jo2.put("page", 0);
+                jo2.put("count", 10000);
                 jo.put("Whitelist[]", jo2);
                 response = new JSONResponse(new MyParser(GET, false).parseResponse(jo));
                 break;
