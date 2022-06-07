@@ -60,6 +60,16 @@ public class MyParser extends APIJSONParser {
     }
 
     /**
+     * 设置最大执行SQL数量
+     *
+     * @return
+     */
+    @Override
+    public int getMaxSQLCount() {
+        return 1000;
+    }
+
+    /**
      * 设置最大数组数量
      *
      * @return
