@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static apijson.RequestMethod.GETS;
 import static apijson.RequestMethod.PUT;
@@ -86,7 +85,7 @@ public class MyJobs {
             if (snap != null) {
                 //上传截图到文件服务器
                 JSONObject uploadRes = null;
-                String url = PropertyUtil.getProperty("fs_upload_url");
+                String url = PropertyUtil.getProperty("fs_url");
                 String name = UUIDUtil.getUUID() + ".jpeg";
                 try {
                     uploadRes = JSONObject.parseObject(UploadUtil.upload(url, name, snap));
