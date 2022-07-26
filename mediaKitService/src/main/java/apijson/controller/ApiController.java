@@ -157,7 +157,7 @@ public class ApiController extends BaseController {
                 result = zlmkApi.isRecording(deviceResp.getString("sn"));
                 Log.i(TAG, "调用查询录制状态Api结果：" + result);
                 if (result != null && JSONObject.parseObject(result).getInteger("code") == 0) {
-                    jsonObject = MyParser.newSuccessResult();
+                    jsonObject = MyParser.extendSuccessResult(JSONObject.parseObject(result));
                 } else {
                     jsonObject = MyParser.newErrorResult(new RuntimeException("查询录制状态失败"));
                 }

@@ -2,7 +2,6 @@ package apijson.common.hook;
 
 import apijson.JSONRequest;
 import apijson.JSONResponse;
-import apijson.Log;
 import apijson.common.utils.DateUtil;
 import apijson.common.utils.PropertyUtil;
 import apijson.creator.MyParser;
@@ -26,7 +25,6 @@ import static apijson.RequestMethod.POST;
 @RestController
 @RequestMapping("zlmk")
 public class ZlmkHook {
-    private final String TAG = ZlmkHook.class.getSimpleName();
 
     /**
      * 录制完成回调
@@ -71,7 +69,6 @@ public class ZlmkHook {
         record.put("file_url", fileUrl);
         resp = new JSONResponse(new MyParser(POST, false).parseResponse(new JSONRequest("DeviceRecord", record)));
         if (resp.isSuccess()) {
-            Log.i(TAG, "[" + stream + "]录制完成，录制时间：" + time + "，文件地址：" + fileUrl);
             return MyParser.newSuccessResult();
         } else {
             return MyParser.newErrorResult(new RuntimeException("保存设备录制记录失败"));
