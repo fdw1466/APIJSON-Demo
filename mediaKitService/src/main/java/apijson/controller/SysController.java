@@ -118,8 +118,8 @@ public class SysController extends BaseController {
      * @param session
      * @return
      */
-    @PostMapping("logout")
     @Override
+    @PostMapping("logout")
     public JSONObject logout(HttpSession session) {
         long userId;
         try {

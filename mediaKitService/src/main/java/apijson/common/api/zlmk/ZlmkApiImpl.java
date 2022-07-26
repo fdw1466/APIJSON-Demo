@@ -47,4 +47,61 @@ public class ZlmkApiImpl implements ZlmkApi {
         }
         return null;
     }
+
+    /**
+     * 开始录制
+     *
+     * @param stream
+     * @return
+     */
+    @Override
+    public String startRecord(String stream) {
+        String url = PropertyUtil.getProperty("zlmk_url") + "/index/api/startRecord";
+        String param = "?secret=" + PropertyUtil.getProperty("zlmk_secret")
+                + "&type=1&vhost=__defaultVhost__&app=live&stream=" + stream;
+        try {
+            return HttpRequestUtil.sendRequest(url + param, GET.name(), null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 结束录制
+     *
+     * @param stream
+     * @return
+     */
+    @Override
+    public String stopRecord(String stream) {
+        String url = PropertyUtil.getProperty("zlmk_url") + "/index/api/stopRecord";
+        String param = "?secret=" + PropertyUtil.getProperty("zlmk_secret")
+                + "&type=1&vhost=__defaultVhost__&app=live&stream=" + stream;
+        try {
+            return HttpRequestUtil.sendRequest(url + param, GET.name(), null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 查询录制状态
+     *
+     * @param stream
+     * @return
+     */
+    @Override
+    public String isRecording(String stream) {
+        String url = PropertyUtil.getProperty("zlmk_url") + "/index/api/isRecording";
+        String param = "?secret=" + PropertyUtil.getProperty("zlmk_secret")
+                + "&type=1&vhost=__defaultVhost__&app=live&stream=" + stream;
+        try {
+            return HttpRequestUtil.sendRequest(url + param, GET.name(), null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

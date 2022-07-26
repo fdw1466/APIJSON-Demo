@@ -5,6 +5,7 @@ import apijson.JSONResponse;
 import apijson.Log;
 import apijson.common.api.zlmk.ZlmkApi;
 import apijson.common.utils.PropertyUtil;
+import apijson.common.utils.UUIDUtil;
 import apijson.common.utils.UploadUtil;
 import apijson.creator.MyParser;
 import com.alibaba.fastjson.JSONArray;
@@ -85,8 +86,8 @@ public class MyJobs {
             if (snap != null) {
                 //上传截图到文件服务器
                 JSONObject uploadRes = null;
-                String url = PropertyUtil.getProperty("fs_url");
-                String name = UUID.randomUUID().toString().replace("-", "").toLowerCase() + ".jpeg";
+                String url = PropertyUtil.getProperty("fs_upload_url");
+                String name = UUIDUtil.getUUID() + ".jpeg";
                 try {
                     uploadRes = JSONObject.parseObject(UploadUtil.upload(url, name, snap));
                 } catch (Exception e) {

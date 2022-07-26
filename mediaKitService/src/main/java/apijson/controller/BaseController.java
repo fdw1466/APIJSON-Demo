@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.http.HttpSession;
 
 import static apijson.RequestMethod.*;
+import static apijson.framework.APIJSONConstant.ID;
 import static apijson.framework.APIJSONConstant.USER_;
 
 public class BaseController extends APIJSONController {
@@ -41,7 +42,7 @@ public class BaseController extends APIJSONController {
                 if (POST.name().equals(method.name())) {
                     String tag = jsonRequest.getString(APIJSONConstant.TAG);
                     if (jsonRequest.getJSONObject(tag) != null) {
-                        jsonRequest.getJSONObject(tag).put("id", jsonResponse.getJSONResponse(tag).getId());
+                        jsonRequest.getJSONObject(tag).put(ID, jsonResponse.getJSONResponse(tag).getId());
                     }
                 }
 
