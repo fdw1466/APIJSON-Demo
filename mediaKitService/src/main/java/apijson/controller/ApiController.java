@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 import static apijson.RequestMethod.GETS;
-import static apijson.framework.APIJSONConstant.*;
+import static apijson.framework.APIJSONConstant.USER_;
+import static apijson.framework.APIJSONConstant.USER_ID;
 
 /**
  * API Controller
@@ -28,7 +29,7 @@ import static apijson.framework.APIJSONConstant.*;
  */
 @RestController
 @RequestMapping("api")
-public class ApiController extends BaseController {
+public class ApiController extends ReqController {
     private final String TAG = ApiController.class.getSimpleName();
 
     @Autowired
@@ -101,7 +102,7 @@ public class ApiController extends BaseController {
      * 录制
      *
      * @param request {
-     *                deviceId: 设备ID
+     *                sn: SN
      *                type: 类型（1开始，2结束，3查询状态）
      *                }
      * @return
@@ -110,31 +111,22 @@ public class ApiController extends BaseController {
     public JSONObject startRecord(@RequestBody String request) {
         //校验参数
         JSONObject jsonObject = null;
-        String deviceId, type;
+        String sn, type;
         try {
             jsonObject = MyParser.parseRequest(request);
-            deviceId = jsonObject.getString("deviceId");
+            sn = jsonObject.getString("sn");
             type = jsonObject.getString("type");
         } catch (Exception e) {
             return MyParser.extendErrorResult(jsonObject, e);
         }
-        if (deviceId == null || type == null) {
+        if (sn == null || type == null) {
             return MyParser.newErrorResult(new ConditionErrorException("参数错误"));
-        }
-
-        //查询设备
-        JSONObject device = new JSONObject();
-        device.put(ID, deviceId);
-        JSONResponse resp = new JSONResponse(new MyParser(GETS, false).parseResponse(new JSONRequest("Device", device)));
-        JSONResponse deviceResp = resp.getJSONResponse("Device");
-        if (deviceResp == null) {
-            return MyParser.newErrorResult(new ConditionErrorException("设备不存在"));
         }
 
         switch (type) {
             case "1":
                 //调用开始录制Api
-                String result = zlmkApi.startRecord(deviceResp.getString("sn"));
+                String result = zlmkApi.startRecord(sn);
                 Log.i(TAG, "调用开始录制Api结果：" + result);
                 if (result != null && JSONObject.parseObject(result).getInteger("code") == 0) {
                     jsonObject = MyParser.newSuccessResult();
@@ -144,7 +136,7 @@ public class ApiController extends BaseController {
                 break;
             case "2":
                 //调用停止录制Api
-                result = zlmkApi.stopRecord(deviceResp.getString("sn"));
+                result = zlmkApi.stopRecord(sn);
                 Log.i(TAG, "调用结束录制Api结果：" + result);
                 if (result != null && JSONObject.parseObject(result).getInteger("code") == 0) {
                     jsonObject = MyParser.newSuccessResult();
@@ -154,7 +146,7 @@ public class ApiController extends BaseController {
                 break;
             case "3":
                 //调用查询录制状态Api
-                result = zlmkApi.isRecording(deviceResp.getString("sn"));
+                result = zlmkApi.isRecording(sn);
                 Log.i(TAG, "调用查询录制状态Api结果：" + result);
                 if (result != null && JSONObject.parseObject(result).getInteger("code") == 0) {
                     jsonObject = MyParser.extendSuccessResult(JSONObject.parseObject(result));
