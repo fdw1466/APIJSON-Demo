@@ -61,11 +61,13 @@ public class MyJobs {
         //解析流列表
         Map<String, String> streamMap = new HashMap<>();
         JSONArray jsonArray = jsonObject.getJSONArray("data");
-        jsonArray.forEach(data -> {
-            JSONObject object = (JSONObject) data;
-            String stream = object.getString("stream"), originUrl = object.getString("originUrl");
-            streamMap.putIfAbsent(stream, originUrl);
-        });
+        if (jsonArray != null) {
+            jsonArray.forEach(data -> {
+                JSONObject object = (JSONObject) data;
+                String stream = object.getString("stream"), originUrl = object.getString("originUrl");
+                streamMap.putIfAbsent(stream, originUrl);
+            });
+        }
         //遍历流列表
         for (String key : streamMap.keySet()) {
             //获取设备
