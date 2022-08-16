@@ -65,8 +65,8 @@ public class ZlmkHook {
         String time = DateUtil.date2Str(new Date(Integer.parseInt(startTime) * 1000L), DateUtil.y_M_d_H_m_s);
         record.put("start_time", time);
         record.put("file_size", fileSize);
-        String fileUrl = PropertyUtil.getProperty("zlmk_url") + "/" + url;
-        record.put("file_url", fileUrl);
+        record.put("file_url", PropertyUtil.getProperty("zlmk_url") + "/" + url);
+        record.put("snap_url", deviceResp.getString("snap_url"));
         resp = new JSONResponse(new MyParser(POST, false).parseResponse(new JSONRequest("DeviceRecord", record)));
         if (resp.isSuccess()) {
             return MyParser.newSuccessResult();
