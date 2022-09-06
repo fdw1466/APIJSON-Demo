@@ -33,4 +33,14 @@ public interface CommonConstant {
      * 普通客户
      */
     int ROLE_CUSTOMER = 2;
+
+    ////////////////////////使用状态////////////////////////
+    /**
+     * 启用
+     */
+    int USE_STATE_ENABLE = 1;
+    /**
+     * 禁用
+     */
+    int USE_STATE_DISABLE = 0;
 }

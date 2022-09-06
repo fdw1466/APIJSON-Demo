@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>com.github.APIJSON</groupId>
 			<artifactId>apijson-framework</artifactId>
-			<version>LATEST</version>
+			<version>5.0.0</version>
 		</dependency>
 
 		<!-- 需要用的 SpringBoot 框架，1.4.0 以上 -->

@@ -39,44 +39,44 @@ public class MyParser extends APIJSONParser {
         super(method, needVerify);
     }
 
-    /**
-     * 设置最大查询数量
-     *
-     * @return
-     */
     @Override
-    public int getMaxQueryCount() {
-        return 200;
+    public int getDefaultQueryCount() {
+        return 10;
     }
 
-    /**
-     * 设置最大更新数量
-     *
-     * @return
-     */
+    @Override
+    public int getMaxQueryPage() {
+        return 1000;
+    }
+
+    @Override
+    public int getMaxQueryCount() {
+        return 3600;
+    }
+
     @Override
     public int getMaxUpdateCount() {
         return 200;
     }
 
-    /**
-     * 设置最大数组数量
-     *
-     * @return
-     */
     @Override
-    public int getMaxArrayCount() {
-        return 50;
+    public int getMaxSQLCount() {
+        return 200;
     }
 
-    /**
-     * 设置最大对象数
-     *
-     * @return
-     */
     @Override
     public int getMaxObjectCount() {
-        return 50;
+        return 200;
+    }
+
+    @Override
+    public int getMaxArrayCount() {
+        return 200;
+    }
+
+    @Override
+    public int getMaxQueryDepth() {
+        return 5;
     }
 
     /**
