@@ -31,6 +31,7 @@ import javax.servlet.http.HttpSession;
 
 import static apijson.RequestMethod.*;
 import static apijson.framework.APIJSONConstant.USER_;
+import static apijson.framework.APIJSONConstant.USER_ID;
 
 /**
  * 提供入口，转交给 APIJSON 的 Parser 来处理
@@ -168,7 +169,7 @@ public class ReqController extends APIJSONController {
                 Integer operateType = POST.name().equals(method.name()) ? CommonConstant.OPERATE_TYPE_ADD
                         : DELETE.name().equals(method.name()) ? CommonConstant.OPERATE_TYPE_DELETE
                         : CommonConstant.OPERATE_TYPE_UPDATE;
-                LogUtil.saveLog(user, operateType, jsonRequest.toString());
+                LogUtil.saveLog(session, operateType, jsonRequest.toString());
             }
         }
 

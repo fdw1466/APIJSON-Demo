@@ -94,19 +94,21 @@ public class SysController extends APIJSONController {
 
         //登录状态保存至session
         super.login(session, user, 1, null, null);
-        //用户登录信息
+        //设置用户id
+        session.setAttribute(ID, user.getId().intValue());
+        //设置用户所属客户id
+        session.setAttribute(USER_ID, user.getCustomerId());
+        //设置用户登录信息
         session.setAttribute(APIJSONConstant.VISITOR_, user.setId(user.getCustomerId().longValue()));
-        //用户id
-        session.setAttribute(USER_ID, user.getId());
-        //用户基本信息
+        //设置用户基本信息
         session.setAttribute(USER_, user);
-        //用户隐私信息
+        //设置用户隐私信息
         session.setAttribute(PRIVACY_, privacy);
         //设置session过期时间
         session.setMaxInactiveInterval(60 * 60 * 24);
 
         //保存日志
-        LogUtil.saveLog(user, CommonConstant.OPERATE_TYPE_LOGIN, "Sign in");
+        LogUtil.saveLog(session, CommonConstant.OPERATE_TYPE_LOGIN, "Sign in");
 
         return resp;
     }
@@ -128,7 +130,7 @@ public class SysController extends APIJSONController {
             super.logout(session);
 
             //保存日志
-            LogUtil.saveLog(user, CommonConstant.OPERATE_TYPE_LOGIN, "Sign out");
+            LogUtil.saveLog(session, CommonConstant.OPERATE_TYPE_LOGIN, "Sign out");
         } catch (Exception e) {
             return MyParser.newErrorResult(e);
         }
