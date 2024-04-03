@@ -41,17 +41,22 @@ public class MyParser extends APIJSONParser {
 
     @Override
     public int getDefaultQueryCount() {
-        return 10;
-    }
-
-    @Override
-    public int getMaxQueryPage() {
-        return 1000;
+        return 200;
     }
 
     @Override
     public int getMaxQueryCount() {
-        return 3600;
+        return 100000;
+    }
+
+    @Override
+    public int getMaxQueryPage() {
+        return 100000;
+    }
+
+    @Override
+    public int getMaxQueryDepth() {
+        return 200;
     }
 
     @Override
@@ -72,11 +77,6 @@ public class MyParser extends APIJSONParser {
     @Override
     public int getMaxArrayCount() {
         return 200;
-    }
-
-    @Override
-    public int getMaxQueryDepth() {
-        return 5;
     }
 
     /**

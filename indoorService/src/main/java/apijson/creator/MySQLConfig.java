@@ -15,9 +15,6 @@ limitations under the License.*/
 package apijson.creator;
 
 import apijson.RequestMethod;
-import apijson.model.Log;
-import apijson.model.Privacy;
-import apijson.model.User;
 import apijson.framework.APIJSONSQLConfig;
 import apijson.orm.AbstractSQLConfig;
 import apijson.orm.model.Access;
