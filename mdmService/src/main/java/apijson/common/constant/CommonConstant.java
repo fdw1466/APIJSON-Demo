@@ -1,0 +1,52 @@
+package apijson.common.constant;
+
+public interface CommonConstant {
+
+    /**
+     * Token前缀
+     */
+    String REDIS_TOKEN_PRE = "mdm:user:token:";
+
+    ////////////////////////操作类型////////////////////////
+    /**
+     * 添加
+     */
+    int OPERATE_TYPE_ADD = 1;
+    /**
+     * 修改
+     */
+    int OPERATE_TYPE_UPDATE = 2;
+    /**
+     * 删除
+     */
+    int OPERATE_TYPE_DELETE = 3;
+    /**
+     * 登录
+     */
+    int OPERATE_TYPE_LOGIN = 4;
+    /**
+     * 登出
+     */
+    int OPERATE_TYPE_LOGOUT = 5;
+
+    ////////////////////////角色////////////////////////
+    /**
+     * 管理员
+     */
+    int ROLE_ADMIN = 1;
+    /**
+     * 普通客户
+     */
+    int ROLE_CUSTOMER = 2;
+
+    ////////////////////////使用状态////////////////////////
+    /**
+     * 启用
+     */
+    int USE_STATE_ENABLE = 1;
+    /**
+     * 禁用
+     */
+    int USE_STATE_DISABLE = 0;
+
+}

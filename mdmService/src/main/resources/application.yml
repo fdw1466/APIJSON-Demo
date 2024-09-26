@@ -1,0 +1,52 @@
+server:
+  port: 8014
+  servlet:
+    context-path: /mdmService
+    session:
+      cookie:
+        secure: true
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mysql://183.47.46.244:3306?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: kirisun
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  #redis 配置
+  redis:
+    database: 1
+    host: 183.47.46.244
+    port: 8089
+    password: 'lkj83wFi9384'
+    timeout: 5000
+    # 过期事件订阅，接收1号数据库中所有key的过期事件
+    listen-pattern: __keyevent@1__:expired
+    lettuce:
+      pool:
+        max-active: 8   #最大连接数据库连接数,设 0 为没有限制
+        max-idle: 8     #最大等待连接中的数量,设 0 为没有限制
+        max-wait: -1ms  #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        min-idle: 0     #最小等待连接中的数量,设 0 为没有限制
+  #MQTT
+  mqtt:
+    #MQTT服务地址，端口号默认1883，如果有多个，用逗号隔开
+    url: tcp://183.47.46.244:1883
+    #用户名
+    username:
+    #密码
+    password:
+    #客户端id(不能重复)
+    client:
+      id: mdm-local-id
+    #MQTT默认的消息推送主题，实际可在调用接口是指定
+    default:
+      topic: mdm-topic
