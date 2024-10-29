@@ -116,6 +116,11 @@ public class HttpRequestUtil {
         }
         //设置当前实例使用的SSLSocketFactory
         conn.setSSLSocketFactory(ssf);
+        //设置自定义的主机名验证器
+        conn.setHostnameVerifier((s, sslSession) -> {
+            // 此处返回 true 允许所有主机名（不推荐）
+            return true;
+        });
         conn.connect();
         //往服务器端写内容
         if (data != null) {
