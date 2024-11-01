@@ -10,9 +10,9 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      jdbc-url: jdbc:mysql://183.47.46.244:3306?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      username: root
-      password: kirisun
+      jdbc-url: ${DATASOURCE_URL:ENC(wqJnsIBF5DUfklU+B3LKI2E145x965pXbz+Di64P06zFQ0McsOKa/IRYuFD25WFF4u3CIEH9ZcLAAmS53WbBf30LhB5XZ+0V3z+uvnyAw0ZIDqPc5oxPZAfXtIxqDebQr1hOtFXYPaJPZvRbcB3ELg==)}
+      username: ${DATASOURCE_URL:ENC(6iWBIMB+cZ27uPcZm48TOw==)}
+      password: ${DATASOURCE_URL:ENC(1qtITQwbFYNxY7haYp7xgw==)}
       minimum-idle: 5
       idle-timeout: 600000
       maximum-pool-size: 10
@@ -21,3 +21,9 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+#jasypt 配置
+jasypt:
+  encryptor:
+    password: indoor    #可通过jvm参数配置该密码
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
