@@ -8,7 +8,7 @@ import java.security.MessageDigest;
  *
  * @author DWER
  */
-public class Md5Unit {
+public class Md5Util {
 
     /**
      * string转md5

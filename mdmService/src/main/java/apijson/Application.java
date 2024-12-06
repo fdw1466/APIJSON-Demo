@@ -15,11 +15,13 @@ limitations under the License.*/
 package apijson;
 
 import apijson.common.utils.PropertyUtil;
+import apijson.config.MqttProviderConfig;
 import apijson.creator.*;
 import apijson.framework.APIJSONApplication;
 import apijson.framework.APIJSONCreator;
 import apijson.orm.*;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;

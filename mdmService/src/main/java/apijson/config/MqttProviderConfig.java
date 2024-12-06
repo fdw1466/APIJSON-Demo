@@ -66,6 +66,8 @@ public class MqttProviderConfig {
             options.setAutomaticReconnect(true);
             //设置遗嘱消息的话题，若客户端和服务器之间的连接意外断开，服务器将发布客户端的遗嘱信息
             options.setWill("willTopic", (clientId + "与服务器断开连接").getBytes(), 0, false);
+            //订阅设备心跳话题
+            client.subscribe("HEARTBEAT");
             //设置回调
             client.setCallback(new MqttProviderCallBack());
             client.connect(options);

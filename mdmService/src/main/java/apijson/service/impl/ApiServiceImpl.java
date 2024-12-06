@@ -59,7 +59,7 @@ public class ApiServiceImpl implements ApiService {
         }
 
         //校验签名
-        String sign = Md5Unit.getMd5(Md5Unit.getMd5(dto.getImei()) + Md5Unit.getMd5(dto.getTimestamp()));
+        String sign = Md5Util.getMd5(Md5Util.getMd5(dto.getImei()) + Md5Util.getMd5(dto.getTimestamp()));
         if (!dto.getSign().equals(sign)) {
             return MyParser.newErrorResult(new IllegalArgumentException("Sign is error"));
         }
@@ -128,14 +128,14 @@ public class ApiServiceImpl implements ApiService {
     }
 
     /**
-     * 心跳
+     * 设备心跳
      *
      * @param dto
      * @return
      */
     @Override
     public JSONObject heartbeat(DeviceDto dto) {
-        log.info("心跳：{}", dto);
+        log.info("设备心跳：{}", dto);
 
         //校验参数
         if (StringUtil.isEmpty(dto.getImei())) {

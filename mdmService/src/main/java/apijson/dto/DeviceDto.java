@@ -2,7 +2,6 @@ package apijson.dto;
 
 public class DeviceDto {
     /*基础信息*/
-
     private String imei;
     private String imei2;
     private String model;
@@ -12,7 +11,6 @@ public class DeviceDto {
     private String applicationVer;
 
     /*配置信息*/
-
     private String lng;
     private String lat;
     private Integer battery;

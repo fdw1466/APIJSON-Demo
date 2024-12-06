@@ -5,8 +5,6 @@ import apijson.common.constant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Component
 public class SubjectUtil {
 
@@ -16,11 +14,10 @@ public class SubjectUtil {
     /**
      * 校验Token
      *
-     * @param req
+     * @param token
      * @param imei
      */
-    public void checkToken(HttpServletRequest req, String imei) throws IllegalAccessException {
-        String token = req.getHeader("AssetToken");
+    public void checkToken(String token, String imei) throws IllegalAccessException {
         Object o = redisUtil.get(CommonConstant.REDIS_TOKEN_PRE + imei);
         if (StringUtil.isEmpty(token) || !token.equals(o)) {
             throw new IllegalAccessException("Token is error");

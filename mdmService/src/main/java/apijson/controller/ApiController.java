@@ -65,7 +65,7 @@ public class ApiController extends APIJSONController {
     }
 
     /**
-     * 心跳
+     * 设备心跳
      *
      * @param dto
      * @param req
@@ -74,7 +74,7 @@ public class ApiController extends APIJSONController {
     @PostMapping("heartbeat")
     public JSONObject heartbeat(@RequestBody DeviceDto dto, HttpServletRequest req) {
         try {
-            subjectUtil.checkToken(req, dto.getImei());
+            subjectUtil.checkToken(req.getHeader("AssetToken"), dto.getImei());
         } catch (IllegalAccessException e) {
             return MyParser.newErrorResult(e);
         }
@@ -92,7 +92,7 @@ public class ApiController extends APIJSONController {
     @GetMapping("checkUpdate")
     public JSONObject checkUpdate(String imei, String version, HttpServletRequest req) {
         try {
-            subjectUtil.checkToken(req, imei);
+            subjectUtil.checkToken(req.getHeader("AssetToken"), imei);
         } catch (IllegalAccessException e) {
             return MyParser.newErrorResult(e);
         }
@@ -108,7 +108,7 @@ public class ApiController extends APIJSONController {
     @PostMapping("saveOtaRecord")
     public JSONObject saveOtaRecord(@RequestBody OtaRecordDto dto, HttpServletRequest req) {
         try {
-            subjectUtil.checkToken(req, dto.getImei());
+            subjectUtil.checkToken(req.getHeader("AssetToken"), dto.getImei());
         } catch (IllegalAccessException e) {
             return MyParser.newErrorResult(e);
         }
