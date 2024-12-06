@@ -41,7 +41,7 @@ public class MqttProviderCallBack implements MqttCallback {
 
             //校验Auth
             String md5 = Md5Util.getMd5(hbMessage.getImei() + "=" + hbMessage.getTimestamp());
-            if (hbMessage.getAuth() != null && !hbMessage.getAuth().equals(md5)) {
+            if (hbMessage.getAuth() != null && !hbMessage.getAuth().equalsIgnoreCase(md5)) {
                 log.error("Auth校验失败");
                 return;
             }
