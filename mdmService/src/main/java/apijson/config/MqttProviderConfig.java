@@ -70,7 +70,7 @@ public class MqttProviderConfig {
             client.setCallback(new MqttProviderCallBack());
             client.connect(options);
             //订阅设备心跳话题
-            client.subscribe("HEARTBEAT");
+            client.subscribe("MDM-HEARTBEAT");
         } catch (MqttException e) {
             e.printStackTrace();
         }

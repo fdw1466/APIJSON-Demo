@@ -36,7 +36,7 @@ public class MqttProviderCallBack implements MqttCallback {
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         log.info("接收消息：主题【{}】，内容：{}", topic, new String(message.getPayload()));
 
-        if ("HEARTBEAT".equals(topic)) {
+        if ("MDM-HEARTBEAT".equals(topic)) {
             HbMessage hbMessage = JSONObject.parseObject(new String(message.getPayload()), HbMessage.class);
 
             //校验Auth
